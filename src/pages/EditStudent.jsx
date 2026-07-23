@@ -1,0 +1,155 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import { getStudentById, updateStudent } from "../services/studentService";
+
+function EditStudent() {
+
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [student, setStudent] = useState({});
+    const handleChange = (e) => {
+
+    setStudent({
+        ...student,
+        [e.target.name]: e.target.value
+    });
+
+};
+const handleUpdate = async () => {
+
+    try {
+
+        await updateStudent(id, student);
+
+        alert("Student Updated Successfully!");
+
+        navigate("/students");
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Update Failed");
+
+    }
+
+};
+    useEffect(() => {
+
+        loadStudent();
+
+    }, []);
+const loadStudent = async () => {
+    try {
+        const response = await getStudentById(id);
+
+        console.log(response.data);
+
+        setStudent(response.data);
+
+    } catch (error) {
+        console.log(error);
+        alert("Failed to load student");
+    }
+};
+    return (
+
+        <>
+            <Navbar />
+
+            <div className="container mt-5">
+
+                <div className="card shadow">
+
+                    <div className="card-body">
+
+                        <h2 className="mb-4">Edit Student</h2>
+
+<div className="row">
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="rollNo"
+            value={student.rollNo || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="firstName"
+            value={student.firstName || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="lastName"
+            value={student.lastName || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="email"
+            value={student.email || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="phone"
+            value={student.phone || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="course"
+            value={student.course || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+    <div className="col-md-6 mb-3">
+        <input
+            className="form-control"
+            name="semester"
+            value={student.semester || ""}
+            onChange={handleChange}
+        />
+    </div>
+
+</div>
+
+<button
+    className="btn btn-primary"
+    onClick={handleUpdate}
+>
+    Update Student
+</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </>
+
+    );
+
+}
+
+export default EditStudent;
