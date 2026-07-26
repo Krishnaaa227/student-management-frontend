@@ -11,7 +11,7 @@ function Students() {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
-
+    const role = localStorage.getItem("role");
     useEffect(() => {
         loadStudents();
     }, []);
@@ -75,12 +75,14 @@ function Students() {
 
                     <h2>Students</h2>
 
-                    <Link
-                        to="/add-student"
-                        className="btn btn-success"
-                    >
-                        + Add Student
-                    </Link>
+                    {role === "ADMIN" && (
+    <Link
+        to="/add-student"
+        className="btn btn-success"
+    >
+        + Add Student
+    </Link>
+)}
 
                 </div>
 
@@ -171,21 +173,25 @@ function Students() {
 
                                         <td>
 
-                                            <Link
-                                                to={`/edit-student/${student.id}`}
-                                                className="btn btn-warning btn-sm me-2"
-                                            >
-                                                Edit
-                                            </Link>
+    {role === "ADMIN" && (
+        <>
+            <Link
+                to={`/edit-student/${student.id}`}
+                className="btn btn-warning btn-sm me-2"
+            >
+                Edit
+            </Link>
 
-                                            <button
-                                                className="btn btn-danger btn-sm"
-                                                onClick={() => handleDelete(student.id)}
-                                            >
-                                                Delete
-                                            </button>
+            <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDelete(student.id)}
+            >
+                Delete
+            </button>
+        </>
+    )}
 
-                                        </td>
+</td>
 
                                     </tr>
 
