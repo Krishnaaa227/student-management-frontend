@@ -6,11 +6,11 @@ function Navbar() {
 
     const logout = () => {
 
-        localStorage.removeItem("token");
+    localStorage.removeItem("token");
 
-        navigate("/login", { replace: true });
+    navigate("/", { replace: true });
 
-    }
+}
 
     return (
 
