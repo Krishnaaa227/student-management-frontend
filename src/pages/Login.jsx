@@ -10,6 +10,7 @@ function Login() {
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
+    console.log("Login button clicked");
 
         try {
 
