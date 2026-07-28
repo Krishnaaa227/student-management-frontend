@@ -1,42 +1,49 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../services/authService";
-
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 function Login() {
 
     const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
-    console.log("Login button clicked");
 
-        try {
+    setLoading(true);
 
-            const response = await login({
-                username,
-                password
-            });
+    try {
 
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("role", response.data.role);
+        const response = await login({
+            username,
+            password
+        });
 
-            alert("Login Successful!");
+        localStorage.setItem("token", response.data.token);
 
-            navigate("/dashboard");
+        localStorage.setItem("role", response.data.role);
 
-        } catch (error) {
+        toast.success("Login Successful!");
 
-            if (error.response) {
-                alert(error.response.data.message || "Invalid Username or Password");
-            } else {
-                alert("Server Error");
-            }
+        navigate("/dashboard");
 
+    } catch (error) {
+
+        if (error.response) {
+            toast.error(error.response.data.message || "Invalid Username or Password");
+        } else {
+            toast.error("Server Error");
         }
 
-    };
+    } finally {
+
+        setLoading(false);
+
+    }
+
+};
 
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
@@ -63,12 +70,25 @@ function Login() {
                 />
 
                 <button
-                    className="btn btn-primary w-100"
-                    onClick={handleLogin}
-                >
-                    Login
-                </button>
+    className="btn btn-primary w-100"
+    onClick={handleLogin}
+    disabled={loading}
+>
 
+    {loading ? (
+        <>
+            <span
+                className="spinner-border spinner-border-sm me-2"
+                role="status"
+            ></span>
+
+            Logging in...
+        </>
+    ) : (
+        "Login"
+    )}
+
+</button>
                 <p className="text-center mt-3">
                     Don't have an account?{" "}
                     <Link to="/register">Register</Link>

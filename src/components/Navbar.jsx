@@ -26,7 +26,11 @@ function Navbar() {
                     Student Management
 
                 </Link>
-
+                <Link
+                to="/courses"
+                className="btn btn-outline-light me-2">
+                    Courses
+                    </Link>
                 <button
                     className="btn btn-danger"
                     onClick={logout}>

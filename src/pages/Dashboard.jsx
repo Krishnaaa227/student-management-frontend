@@ -1,161 +1,223 @@
-import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
-import { getAllStudents } from "../services/studentService";
+import Navbar from "../components/Navbar";
+import { getDashboardStats , getCourseChart} from "../services/dashboardService";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer
+} from "recharts";
 
 function Dashboard() {
-    const [students, setStudents] = useState([]);
 
-useEffect(() => {
+    const [stats, setStats] = useState({
+        totalStudents: 0,
+        totalCourses: 0,
+        totalUsers: 0,
+        totalAdmins: 0
+    });
+    const [courseChart, setCourseChart] = useState([]);
+
+    useEffect(() => {
+
     loadDashboard();
+
+    loadCourseChart();
+
 }, []);
 
-const loadDashboard = async () => {
+    const loadDashboard = async () => {
+
+        try {
+
+            const response = await getDashboardStats();
+
+            setStats(response.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+            toast.error("Failed to load dashboard");
+
+        }
+
+    };
+    const loadCourseChart = async () => {
+
     try {
-        const response = await getAllStudents();
-        setStudents(response.data);
+
+        const response = await getCourseChart();
+
+        setCourseChart(response.data);
+
     } catch (error) {
+
         console.log(error);
+
+        toast.error("Failed to load chart");
+
     }
+
 };
 
     return (
+
         <>
             <Navbar />
 
-            <div className="container mt-5">
+            <div className="container mt-4">
+
                 <h2 className="mb-4">
-    <i className="bi bi-speedometer2 me-2"></i>
-    Dashboard
-</h2>
-                <p className="text-muted">
-    Welcome back! Here's an overview of your Student Management System.
-</p>
+                    Dashboard
+                </h2>
+
                 <div className="row">
 
-                    <div className="col-md-4 mb-4">
-    <Link
-    to="/students"
-    className="text-decoration-none text-dark"
-    style={{ cursor: "pointer" }}
->
-    <div className="card shadow border-0 h-100">
+                    <div className="col-md-3 mb-3">
 
-        <div className="card-body d-flex justify-content-between align-items-center">
+                        <div className="card bg-primary text-white shadow">
 
-            <div>
-                <h6 className="text-muted">Total Students</h6>
-                <h2 className="fw-bold">{students.length}</h2>
-            </div>
+                            <div className="card-body">
 
-            <i
-                className="bi bi-people-fill text-primary"
-                style={{ fontSize: "50px" }}
-            ></i>
+                                <h5>Total Students</h5>
 
-        </div>
+                                <h2>{stats.totalStudents}</h2>
 
-    </div>
-</Link>
-</div>
+                            </div>
 
-                    <div className="col-md-4 mb-4">
-    <div className="card shadow border-0 h-100">
-        <div className="card-body d-flex justify-content-between align-items-center">
+                        </div>
 
-            <div>
-                <h6 className="text-muted">Total Courses</h6>
+                    </div>
 
-                <h2 className="fw-bold">
-                    {[...new Set(students.map(student => student.course))].length}
-                </h2>
+                    <div className="col-md-3 mb-3">
 
-            </div>
+                        <div className="card bg-success text-white shadow">
 
-            <i className="bi bi-book-fill text-success" style={{ fontSize: "50px" }}></i>
+                            <div className="card-body">
 
-        </div>
-    </div>
-</div>
+                                <h5>Total Courses</h5>
 
-                    <div className="col-md-4 mb-4">
-    <div className="card shadow border-0 h-100">
-        <div className="card-body d-flex justify-content-between align-items-center">
+                                <h2>{stats.totalCourses}</h2>
 
-            <div>
-                <h6 className="text-muted">Total Semesters</h6>
+                            </div>
 
-                <h2 className="fw-bold">
-                    {[...new Set(students.map(student => student.semester))].length}
-                </h2>
+                        </div>
 
-            </div>
+                    </div>
 
-            <i className="bi bi-mortarboard-fill text-warning" style={{ fontSize: "50px" }}></i>
+                    <div className="col-md-3 mb-3">
 
-        </div>
-    </div>
-</div>
-<div className="card shadow border-0 mt-4">
+                        <div className="card bg-warning text-dark shadow">
 
-    <div className="card-header bg-primary text-white d-flex justify-content-between">
+                            <div className="card-body">
 
-        <h5>Recent Students</h5>
+                                <h5>Total Users</h5>
 
-        <Link
-            to="/students"
-            className="btn btn-light btn-sm"
-        >
-            View All
-        </Link>
+                                <h2>{stats.totalUsers}</h2>
 
-    </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className="col-md-3 mb-3">
+
+                        <div className="card bg-danger text-white shadow">
+
+                            <div className="card-body">
+
+                                <h5>Total Admins</h5>
+
+                                <h2>{stats.totalAdmins}</h2>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className="card shadow mt-4">
+
+                    <div className="card-body">
+
+                        <h4 className="mb-3">
+                            Quick Actions
+                        </h4>
+                        <div className="card shadow mt-4">
 
     <div className="card-body">
 
-        <table className="table table-hover">
+        <h4 className="mb-4">
+            Students by Course
+        </h4>
 
-            <thead>
+        <ResponsiveContainer
+            width="100%"
+            height={350}
+        >
 
-                <tr>
-                    <th>Roll No</th>
-                    <th>Name</th>
-                    <th>Course</th>
-                </tr>
+            <BarChart data={courseChart}>
 
-            </thead>
+                <CartesianGrid strokeDasharray="3 3" />
 
-            <tbody>
+                <XAxis dataKey="course" />
 
-                {students.slice(0,5).map(student => (
+                <YAxis />
 
-                    <tr key={student.id}>
+                <Tooltip />
 
-                        <td>{student.rollNo}</td>
+                <Bar
+                    dataKey="totalStudents"
+                    radius={[6,6,0,0]}
+                />
 
-                        <td>
-                            {student.firstName} {student.lastName}
-                        </td>
+            </BarChart>
 
-                        <td>{student.course}</td>
-
-                    </tr>
-
-                ))}
-
-            </tbody>
-
-        </table>
+        </ResponsiveContainer>
 
     </div>
 
 </div>
+                        <Link
+                            to="/students"
+                            className="btn btn-primary me-2"
+                        >
+                            Manage Students
+                        </Link>
+
+                        <Link
+                            to="/courses"
+                            className="btn btn-success me-2"
+                        >
+                            Manage Courses
+                        </Link>
+
+                        <Link
+                            to="/add-student"
+                            className="btn btn-warning"
+                        >
+                            Add Student
+                        </Link>
+
+                    </div>
 
                 </div>
 
             </div>
+
         </>
+
     );
+
 }
 
 export default Dashboard;

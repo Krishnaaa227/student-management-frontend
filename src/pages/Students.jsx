@@ -5,7 +5,9 @@ import {
     deleteStudent
 } from "../services/studentService";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { exportStudentsToExcel } from "../utils/exportExcel";
 function Students() {
 
     const [students, setStudents] = useState([]);
@@ -29,7 +31,7 @@ function Students() {
         } catch (error) {
 
             console.log(error);
-            alert("Failed to fetch students");
+           toast.error("Failed to fetch students");
 
         } finally {
 
@@ -41,25 +43,31 @@ function Students() {
 
     const handleDelete = async (id) => {
 
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete this student?"
-        );
+        const result = await Swal.fire({
+    title: "Delete Student?",
+    text: "You won't be able to recover this student.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#6c757d",
+    confirmButtonText: "Delete",
+    cancelButtonText: "Cancel"
+});
 
-        if (!confirmDelete) return;
+if (!result.isConfirmed) return;
 
         try {
 
             await deleteStudent(id);
 
-            alert("Student Deleted Successfully!");
-
+            toast.success("Student Deleted Successfully!");
             loadStudents();
 
         } catch (error) {
 
             console.log(error);
 
-            alert("Delete Failed");
+            toast.error("Delete Failed");
 
         }
 
@@ -70,24 +78,43 @@ function Students() {
             <Navbar />
 
             <div className="container mt-4">
-
                 <div className="d-flex justify-content-between align-items-center mb-3">
 
-                    <h2>Students</h2>
+    <h2>Students</h2>
 
-                    {role === "ADMIN" && (
-    <Link
-        to="/add-student"
-        className="btn btn-success"
-    >
-        + Add Student
-    </Link>
-)}
+    {role === "ADMIN" && (
 
-                </div>
+        <div>
 
+            <button
+                className="btn btn-success me-2"
+                onClick={() =>
+    exportStudentsToExcel(
+        students.filter(student =>
+            student.rollNo.toString().includes(search) ||
+            `${student.firstName} ${student.lastName}`
+                .toLowerCase()
+                .includes(search.toLowerCase())
+        )
+    )
+}
+            >
+                📊 Export Excel
+            </button>
+
+            <Link
+                to="/add-student"
+                className="btn btn-primary"
+            >
+                + Add Student
+            </Link>
+
+        </div>
+
+    )}
+
+</div>
                 <div className="mb-3">
-
                     <input
                         type="text"
                         className="form-control"

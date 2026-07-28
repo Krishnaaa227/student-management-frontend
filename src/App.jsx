@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Students from "./pages/Students";
 import EditStudent from "./pages/EditStudent";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Courses from "./pages/Courses";
 function App() {
     return (
         <BrowserRouter>
@@ -50,7 +51,14 @@ function App() {
             </ProtectedRoute>
         }
     />
-
+    <Route
+    path="/courses"
+    element={
+        <ProtectedRoute>
+            <Courses />
+        </ProtectedRoute>
+    }
+/>
 </Routes>
         </BrowserRouter>
     );

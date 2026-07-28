@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { register } from "../services/authService";
-
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 function Register() {
 
     const [username, setUsername] = useState("");
@@ -24,9 +25,9 @@ function Register() {
         } catch (error) {
 
             if (error.response) {
-                alert(error.response.data.message || "Registration Failed");
+                toast.error(error.response.data.message || "Registration Failed");
             } else {
-                alert("Server Error");
+               toast.error("Server Error");
             }
 
         }
