@@ -152,9 +152,33 @@ function Dashboard() {
                         <h4 className="mb-3">
                             Quick Actions
                         </h4>
-                        <div className="card shadow mt-4">
+                        <div className="d-flex flex-wrap gap-3">
 
-    <div className="card-body">
+            <Link
+                to="/students"
+                className="btn btn-primary"
+            >
+                👨‍🎓 Manage Students
+            </Link>
+
+            <Link
+                to="/courses"
+                className="btn btn-success"
+            >
+                📚 Manage Courses
+            </Link>
+
+            <Link
+                to="/add-student"
+                className="btn btn-warning"
+            >
+                ➕ Add Student
+            </Link>
+
+        </div>
+                        <div className="card shadow mt-4">
+</div>
+<div className="card-body">
 
         <h4 className="mb-4">
             Students by Course
@@ -186,27 +210,6 @@ function Dashboard() {
 
     </div>
 
-</div>
-                        <Link
-                            to="/students"
-                            className="btn btn-primary me-2"
-                        >
-                            Manage Students
-                        </Link>
-
-                        <Link
-                            to="/courses"
-                            className="btn btn-success me-2"
-                        >
-                            Manage Courses
-                        </Link>
-
-                        <Link
-                            to="/add-student"
-                            className="btn btn-warning"
-                        >
-                            Add Student
-                        </Link>
 
                     </div>
 
