@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { addStudent } from "../services/studentService";
 import { useNavigate } from "react-router-dom";
@@ -225,28 +225,27 @@ const loadCourses = async () => {
                                 <label className="form-label">
                                     Course
                                 </label>
-
                                 <select
-    className="form-select"
+    className={`form-select ${errors.course ? "is-invalid" : ""}`}
     name="course"
     value={student.course}
     onChange={handleChange}
 >
-
     <option value="">Select Course</option>
 
-    {courses.map(course => (
-
+    {courses.map((course) => (
         <option
             key={course.id}
             value={course.courseName}
         >
             {course.courseName}
         </option>
-
     ))}
-
 </select>
+
+<div className="invalid-feedback">
+    {errors.course}
+</div>
 
                                 <div className="invalid-feedback">
                                     {errors.course}

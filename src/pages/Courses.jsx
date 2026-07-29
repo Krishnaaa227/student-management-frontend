@@ -49,8 +49,6 @@ const handleAddCourse = async () => {
         toast.success("Course Added Successfully");
 
         setCourseName("");
-        setCourseCode("");
-
         loadCourses();
 
     } catch (error) {

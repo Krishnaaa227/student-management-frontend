@@ -4,4 +4,17 @@ const api = axios.create({
     baseURL: "https://student-management-backend-ux7r.onrender.com/",
 });
 
+// Automatically attach JWT token to every request
+api.interceptors.request.use((config) => {
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+
+});
+
 export default api;

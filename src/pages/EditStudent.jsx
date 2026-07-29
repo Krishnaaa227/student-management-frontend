@@ -13,9 +13,13 @@ function EditStudent() {
     const [courses, setCourses] = useState([]);
     const handleChange = (e) => {
 
+    const { name, value } = e.target;
+
     setStudent({
         ...student,
-        [e.target.name]: e.target.value
+        [name]: name === "semester"
+            ? Number(value)
+            : value
     });
 
 };
@@ -187,12 +191,16 @@ const loadStudent = async () => {
 </div>
 </div>
 
-<button
-    className="btn btn-primary"
-    onClick={handleUpdate}
->
-    Update Student
-</button>
+<div className="text-center mt-3">
+
+    <button
+        className="btn btn-primary px-5"
+        onClick={handleUpdate}
+    >
+        Update Student
+    </button>
+
+</div>
 
                     </div>
 
