@@ -80,7 +80,7 @@ function Dashboard() {
 
             <div className="container mt-4">
 
-                <h2 className="mb-4">
+                <h2 className="mb-3">
                     Dashboard
                 </h2>
 
@@ -88,7 +88,7 @@ function Dashboard() {
 
                     <div className="col-lg-4 col-md-6 mb-4">
 
-    <div className="card dashboard-card bg-primary text-white shadow border-0">
+    <div className="card dashboard-card bg-success text-white shadow border-0">
 
         <div className="card-body text-center">
 
