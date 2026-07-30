@@ -3,12 +3,12 @@ import Navbar from "../components/Navbar";
 import { getDashboardStats , getCourseChart} from "../services/dashboardService";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
 import {
     FaUserGraduate,
     FaBook,
     FaUsers,
-    FaUserShield
+    FaPlusCircle
 } from "react-icons/fa";
 import {
     BarChart,
