@@ -1,0 +1,19 @@
+.dashboard-card{
+    border-radius:18px;
+    transition:all .3s ease;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+}
+
+.quick-card{
+    border-radius:18px;
+    transition:all .3s ease;
+}
+
+.quick-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+}

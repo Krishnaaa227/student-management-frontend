@@ -3,6 +3,13 @@ import Navbar from "../components/Navbar";
 import { getDashboardStats , getCourseChart} from "../services/dashboardService";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import "./Dashboard.css";
+import {
+    FaUserGraduate,
+    FaBook,
+    FaUsers,
+    FaUserShield
+} from "react-icons/fa";
 import {
     BarChart,
     Bar,
@@ -79,80 +86,76 @@ function Dashboard() {
 
                 <div className="row">
 
-                    <div className="col-md-3 mb-3">
+                    <div className="col-xl-3 col-md-6 mb-4">
 
-                        <div className="card bg-primary text-white shadow">
+    <div className="card dashboard-card bg-primary text-white shadow border-0">
 
-                            <div className="card-body">
+        <div className="card-body text-center">
 
-                                <h5>Total Students</h5>
+            <FaUserGraduate size={35} />
 
-                                <h2>{stats.totalStudents}</h2>
+            <h6 className="mt-3">
+                Total Students
+            </h6>
 
-                            </div>
+            <h2>{stats.totalStudents}</h2>
 
-                        </div>
+        </div>
 
-                    </div>
+    </div>
 
-                    <div className="col-md-3 mb-3">
+</div>
 
-                        <div className="card bg-success text-white shadow">
+                    <div className="col-xl-3 col-md-6 mb-4">
 
-                            <div className="card-body">
+    <div className="card dashboard-card bg-primary text-white shadow border-0">
 
-                                <h5>Total Courses</h5>
+        <div className="card-body text-center">
 
-                                <h2>{stats.totalCourses}</h2>
+            <FaBook size={40} />
+            <h5 className="mt-3">
+                Total Courses
+            </h5>
 
-                            </div>
+            <h2>{stats.totalCourses}</h2>
 
-                        </div>
+        </div>
 
-                    </div>
+    </div>
 
-                    <div className="col-md-3 mb-3">
+</div>
 
-                        <div className="card bg-warning text-dark shadow">
+                    <div className="col-xl-3 col-md-6 mb-4">
 
-                            <div className="card-body">
+    <div className="card dashboard-card bg-primary text-white shadow border-0">
 
-                                <h5>Total Users</h5>
+        <div className="card-body text-center">
 
-                                <h2>{stats.totalUsers}</h2>
+            <FaUsers size={40} />
+            <h5 className="mt-3">
+                Total Users
+            </h5>
 
-                            </div>
+            <h2>{stats.totalUsers}</h2>
 
-                        </div>
+        </div>
 
-                    </div>
+    </div>
 
-                    <div className="col-md-3 mb-3">
-
-                        <div className="card bg-danger text-white shadow">
-
-                            <div className="card-body">
-
-                                <h5>Total Admins</h5>
-
-                                <h2>{stats.totalAdmins}</h2>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+</div>
                 </div>
 
-                <div className="card shadow mt-4">
+                {/* Quick Actions */}
 
-                    <div className="card-body">
+<div className="card shadow mt-4">
 
-                        <h4 className="mb-3">
-                            Quick Actions
-                        </h4>
-                        <div className="d-flex flex-wrap gap-3">
+    <div className="card-body">
+
+        <h4 className="mb-3">
+            Quick Actions
+        </h4>
+
+        <div className="d-flex flex-wrap gap-3">
 
             <Link
                 to="/students"
@@ -176,9 +179,16 @@ function Dashboard() {
             </Link>
 
         </div>
-                        <div className="card shadow mt-4">
+
+    </div>
+
 </div>
-<div className="card-body">
+
+{/* Students by Course */}
+
+<div className="card shadow mt-4">
+
+    <div className="card-body">
 
         <h4 className="mb-4">
             Students by Course
@@ -201,7 +211,8 @@ function Dashboard() {
 
                 <Bar
                     dataKey="totalStudents"
-                    radius={[6,6,0,0]}
+                    fill="#0d6efd"
+                    radius={[8, 8, 0, 0]}
                 />
 
             </BarChart>
@@ -210,13 +221,8 @@ function Dashboard() {
 
     </div>
 
-
+</div>
                     </div>
-
-                </div>
-
-            </div>
-
         </>
 
     );
