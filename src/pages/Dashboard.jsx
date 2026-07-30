@@ -92,7 +92,7 @@ function Dashboard() {
 
         <div className="card-body text-center">
 
-            <FaUserGraduate size={35} />
+            <FaUserGraduate size={40} />
 
             <h6 className="mt-3">
                 Total Students
