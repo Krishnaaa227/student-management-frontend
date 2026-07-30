@@ -17,7 +17,8 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    ResponsiveContainer
+    ResponsiveContainer,
+    LabelList
 } from "recharts";
 
 function Dashboard() {
@@ -25,8 +26,7 @@ function Dashboard() {
     const [stats, setStats] = useState({
         totalStudents: 0,
         totalCourses: 0,
-        totalUsers: 0,
-        totalAdmins: 0
+        totalUsers: 0
     });
     const [courseChart, setCourseChart] = useState([]);
 
@@ -86,7 +86,7 @@ function Dashboard() {
 
                 <div className="row">
 
-                    <div className="col-xl-3 col-md-6 mb-4">
+                    <div className="col-lg-4 col-md-6 mb-4">
 
     <div className="card dashboard-card bg-primary text-white shadow border-0">
 
@@ -106,9 +106,9 @@ function Dashboard() {
 
 </div>
 
-                    <div className="col-xl-3 col-md-6 mb-4">
+                    <div className="col-lg-4 col-md-6 mb-4">
 
-    <div className="card dashboard-card bg-primary text-white shadow border-0">
+    <div className="card dashboard-card bg-success text-white shadow border-0">
 
         <div className="card-body text-center">
 
@@ -125,9 +125,9 @@ function Dashboard() {
 
 </div>
 
-                    <div className="col-xl-3 col-md-6 mb-4">
+                    <div className="col-lg-4 col-md-6 mb-4">
 
-    <div className="card dashboard-card bg-primary text-white shadow border-0">
+    <div className="card dashboard-card bg-warning text-dark shadow border-0">
 
         <div className="card-body text-center">
 
@@ -155,30 +155,45 @@ function Dashboard() {
             Quick Actions
         </h4>
 
-        <div className="d-flex flex-wrap gap-3">
+        <div className="row mt-3">
 
-            <Link
-                to="/students"
-                className="btn btn-primary"
-            >
-                👨‍🎓 Manage Students
-            </Link>
+    <div className="col-md-4 mb-3">
 
-            <Link
-                to="/courses"
-                className="btn btn-success"
-            >
-                📚 Manage Courses
-            </Link>
+        <Link
+            to="/students"
+            className="btn btn-primary w-100 py-3"
+        >
+            <FaUserGraduate className="me-2" />
+            Manage Students
+        </Link>
 
-            <Link
-                to="/add-student"
-                className="btn btn-warning"
-            >
-                ➕ Add Student
-            </Link>
+    </div>
 
-        </div>
+    <div className="col-md-4 mb-3">
+
+        <Link
+            to="/courses"
+            className="btn btn-success w-100 py-3"
+        >
+            <FaBook className="me-2" />
+            Manage Courses
+        </Link>
+
+    </div>
+
+    <div className="col-md-4 mb-3">
+
+        <Link
+            to="/add-student"
+            className="btn btn-warning w-100 py-3"
+        >
+            <FaPlusCircle className="me-2" />
+            Add Student
+        </Link>
+
+    </div>
+
+</div>
 
     </div>
 
@@ -196,7 +211,7 @@ function Dashboard() {
 
         <ResponsiveContainer
             width="100%"
-            height={350}
+            height={300}
         >
 
             <BarChart data={courseChart}>
@@ -207,14 +222,20 @@ function Dashboard() {
 
                 <YAxis />
 
-                <Tooltip />
+                <Tooltip
+    cursor={{ fill: "#f5f5f5" }}
+/>
 
                 <Bar
-                    dataKey="totalStudents"
-                    fill="#0d6efd"
-                    radius={[8, 8, 0, 0]}
-                />
-
+    dataKey="totalStudents"
+    fill="#2563eb"
+    radius={[8,8,0,0]}
+>
+    <LabelList
+        dataKey="totalStudents"
+        position="top"
+    />
+</Bar>
             </BarChart>
 
         </ResponsiveContainer>
