@@ -1,52 +1,53 @@
-import {
-    FaBell,
-    FaUserCircle
-} from "react-icons/fa";
 import "../styles/Header.css";
+import { FaBell, FaUserCircle } from "react-icons/fa";
+
 function Header() {
+    const role = localStorage.getItem("role");
 
     return (
-
-        <div className="header">
+        <header className="app-header">
 
             <div>
 
                 <h3 className="mb-0">
-                    Welcome Back 👋
+                    Student Management System
                 </h3>
 
                 <small className="text-muted">
-                    Student Management System
+                    Welcome back 👋
                 </small>
 
             </div>
 
-            <div className="header-right">
+            <div className="d-flex align-items-center gap-4">
 
-                <button className="icon-btn">
+                <FaBell
+                    size={20}
+                    className="text-secondary"
+                />
 
-                    <FaBell />
+                <div className="d-flex align-items-center gap-2">
 
-                </button>
+                    <FaUserCircle size={35} />
 
-                <div className="profile">
+                    <div>
 
-                    <FaUserCircle size={30} />
+                        <strong>{role}</strong>
 
-                    <span>
+                        <br />
 
-                        Admin
+                        <small className="text-muted">
+                            Logged In
+                        </small>
 
-                    </span>
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
-
+        </header>
     );
-
 }
 
 export default Header;

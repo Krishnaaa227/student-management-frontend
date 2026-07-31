@@ -2,22 +2,18 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/Dashboard.css";
-import Header from "../components/Header";
 import { getDashboardStats, getCourseChart } from "../services/dashboardService";
-
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
-
+import AdminLayout from "../layouts/AdminLayout";
 import {
     FaUserGraduate,
     FaBook,
     FaUsers,
     FaPlusCircle
 } from "react-icons/fa";
-
 import {
     BarChart,
     Bar,
@@ -28,7 +24,7 @@ import {
     ResponsiveContainer,
     LabelList
 } from "recharts";
-import Sidebar from "../components/Sidebar";
+
 
 function Dashboard() {
 
@@ -83,16 +79,7 @@ function Dashboard() {
 
     return (
         <>
-            <Sidebar/>
-
-            <div
-    className="container-fluid"
-    style={{
-        marginLeft: "270px",
-        padding: "30px"
-    }}
->
-<Header/>
+           
                 <div className="mb-4">
 
                     <h2 className="fw-bold">
@@ -364,9 +351,6 @@ function Dashboard() {
 
                 </motion.div>
 
-            </div>
-
-            <Footer />
 
         </>
     );
