@@ -2,11 +2,19 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../services/authService";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
+
+import {
+    FaUserGraduate,
+    FaEye,
+    FaEyeSlash
+} from "react-icons/fa";
+
+import "../styles/Login.css";
 function Login() {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -46,57 +54,98 @@ function Login() {
 };
 
     return (
-        <div className="container vh-100 d-flex justify-content-center align-items-center">
+        <div className="login-page">
 
-            <div className="card shadow p-4" style={{ width: "400px" }}>
+    <div className="login-card">
 
-                <h2 className="text-center mb-4">
-                    Student Management
-                </h2>
+        <div className="login-logo">
+            <FaUserGraduate />
+        </div>
 
-                <input
-                    className="form-control mb-3"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+        <h2 className="login-title">
+            Student Management System
+        </h2>
 
-                <input
-                    type="password"
-                    className="form-control mb-3"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+        <input
+            className="form-control mb-3"
+            placeholder="Username"
+            value={username}
+            onChange={(e)=>setUsername(e.target.value)}
+        />
 
-                <button
-    className="btn btn-primary w-100"
-    onClick={handleLogin}
-    disabled={loading}
->
+        <div className="password-box mb-3">
 
-    {loading ? (
-        <>
+            <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                placeholder="Password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
+            />
+
             <span
-                className="spinner-border spinner-border-sm me-2"
-                role="status"
-            ></span>
+                className="password-icon"
+                onClick={()=>setShowPassword(!showPassword)}
+            >
 
-            Logging in...
-        </>
-    ) : (
-        "Login"
-    )}
+                {showPassword ? <FaEyeSlash/> : <FaEye/>}
 
-</button>
-                <p className="text-center mt-3">
-                    Don't have an account?{" "}
-                    <Link to="/register">Register</Link>
-                </p>
-
-            </div>
+            </span>
 
         </div>
+
+        <button
+            className="btn btn-light w-100"
+            onClick={handleLogin}
+            disabled={loading}
+        >
+
+            {loading ?
+
+            <>
+                <span
+                    className="spinner-border spinner-border-sm me-2"
+                ></span>
+
+                Logging in...
+            </>
+
+            :
+
+            "Login"}
+
+        </button>
+
+        <p className="text-center mt-4">
+
+            Don't have an account?
+
+            <Link
+                to="/register"
+                className="ms-2"
+            >
+                Register
+            </Link>
+
+        </p>
+
+        <div className="footer-text">
+
+    <strong>Student Management System</strong>
+
+    <br/>
+
+    Version 1.0
+
+    <br/>
+
+    © 2026 Krishna Sheladiya
+
+</div>
+
+    </div>
+
+</div>
     );
 }
 

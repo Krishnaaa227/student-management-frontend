@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { getDashboardStats , getCourseChart} from "../services/dashboardService";
+import Footer from "../components/Footer";
+import "../styles/Dashboard.css";
+import Header from "../components/Header";
+import { getDashboardStats, getCourseChart } from "../services/dashboardService";
+
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "../styles/Dashboard.css";
+
+import CountUp from "react-countup";
+import { motion } from "framer-motion";
+
 import {
     FaUserGraduate,
     FaBook,
     FaUsers,
     FaPlusCircle
 } from "react-icons/fa";
+
 import {
     BarChart,
     Bar,
@@ -20,23 +28,22 @@ import {
     ResponsiveContainer,
     LabelList
 } from "recharts";
+import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
 
     const [stats, setStats] = useState({
         totalStudents: 0,
         totalCourses: 0,
-        totalUsers: 0,
+        totalUsers: 0
     });
+
     const [courseChart, setCourseChart] = useState([]);
 
     useEffect(() => {
-
-    loadDashboard();
-
-    loadCourseChart();
-
-}, []);
+        loadDashboard();
+        loadCourseChart();
+    }, []);
 
     const loadDashboard = async () => {
 
@@ -55,199 +62,314 @@ function Dashboard() {
         }
 
     };
+
     const loadCourseChart = async () => {
 
-    try {
+        try {
 
-        const response = await getCourseChart();
+            const response = await getCourseChart();
 
-        setCourseChart(response.data);
+            setCourseChart(response.data);
 
-    } catch (error) {
+        } catch (error) {
 
-        console.log(error);
+            console.log(error);
 
-        toast.error("Failed to load chart");
+            toast.error("Failed to load chart");
 
-    }
+        }
 
-};
+    };
 
     return (
-
         <>
-            <Navbar />
+            <Sidebar/>
 
-            <div className="container mt-4">
+            <div
+    className="container-fluid"
+    style={{
+        marginLeft: "270px",
+        padding: "30px"
+    }}
+>
+<Header/>
+                <div className="mb-4">
 
-                <h2 className="mb-4">
-                    Dashboard
-                </h2>
+                    <h2 className="fw-bold">
+                        Dashboard Overview
+                    </h2>
+
+                    <p className="text-muted">
+                        Manage students, courses and users efficiently from one place.
+                    </p>
+
+                </div>
 
                 <div className="row">
 
-                    <div className="col-lg-4 col-md-6 mb-4">
-
-    <div className="card dashboard-card bg-primary text-white shadow border-0">
-
-        <div className="card-body text-center">
-
-            <FaUserGraduate size={40} />
-
-            <h6 className="mt-3">
-                Total Students
-            </h6>
-
-            <h2>{stats.totalStudents}</h2>
-
-        </div>
-
-    </div>
-
-</div>
+                    {/* Students */}
 
                     <div className="col-lg-4 col-md-6 mb-4">
 
-    <div className="card dashboard-card bg-success text-white shadow border-0">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
 
-        <div className="card-body text-center">
+                            <div className="card dashboard-card bg-primary text-white shadow border-0">
 
-            <FaBook size={40} />
-            <h5 className="mt-3">
-                Total Courses
-            </h5>
+                                <div className="card-body text-center">
 
-            <h2>{stats.totalCourses}</h2>
+                                    <FaUserGraduate size={40} />
 
-        </div>
+                                    <h5 className="mt-3">
+                                        Total Students
+                                    </h5>
 
-    </div>
+                                    <h2 className="fw-bold">
 
-</div>
+                                        <CountUp
+                                            start={0}
+                                            end={stats.totalStudents}
+                                            duration={2}
+                                            separator=","
+                                        />
+
+                                    </h2>
+
+                                    <p className="mb-0 small opacity-75">
+                                        Registered Students
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </motion.div>
+
+                    </div>
+
+                    {/* Courses */}
 
                     <div className="col-lg-4 col-md-6 mb-4">
 
-    <div className="card dashboard-card bg-warning text-dark shadow border-0">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.15 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
 
-        <div className="card-body text-center">
+                            <div className="card dashboard-card bg-success text-white shadow border-0">
 
-            <FaUsers size={40} />
-            <h5 className="mt-3">
-                Total Users
-            </h5>
+                                <div className="card-body text-center">
 
-            <h2>{stats.totalUsers}</h2>
+                                    <FaBook size={40} />
 
-        </div>
+                                    <h5 className="mt-3">
+                                        Total Courses
+                                    </h5>
 
-    </div>
+                                    <h2 className="fw-bold">
 
-</div>
+                                        <CountUp
+                                            start={0}
+                                            end={stats.totalCourses}
+                                            duration={2}
+                                            separator=","
+                                        />
+
+                                    </h2>
+
+                                    <p className="mb-0 small opacity-75">
+                                        Available Courses
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </motion.div>
+
+                    </div>
+
+                    {/* Users */}
+
+                    <div className="col-lg-4 col-md-6 mb-4">
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.30 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+
+                            <div className="card dashboard-card bg-warning text-dark shadow border-0">
+
+                                <div className="card-body text-center">
+
+                                    <FaUsers size={40} />
+
+                                    <h5 className="mt-3">
+                                        Total Users
+                                    </h5>
+
+                                    <h2 className="fw-bold">
+
+                                        <CountUp
+                                            start={0}
+                                            end={stats.totalUsers}
+                                            duration={2}
+                                            separator=","
+                                        />
+
+                                    </h2>
+
+                                    <p className="mb-0 small opacity-75">
+                                        Active Accounts
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </motion.div>
+
+                    </div>
+
                 </div>
 
                 {/* Quick Actions */}
 
-<div className="card shadow mt-4">
+                <div className="card shadow mt-4">
 
-    <div className="card-body">
+                    <div className="card-body">
 
-        <h4 className="mb-3">
-            Quick Actions
-        </h4>
+                        <h4 className="mb-3">
+                            Quick Actions
+                        </h4>
 
-        <div className="row mt-3">
+                        <div className="row mt-3">
 
-    <div className="col-md-4 mb-3">
+                            <div className="col-md-4 mb-3">
 
-        <Link
-            to="/students"
-            className="btn btn-primary w-100 py-3"
-        >
-            <FaUserGraduate className="me-2" />
-            Manage Students
-        </Link>
+                                <Link
+                                    to="/students"
+                                    className="btn btn-primary w-100 py-3 rounded-4 shadow-sm"
+                                >
 
-    </div>
+                                    <FaUserGraduate className="me-2" />
 
-    <div className="col-md-4 mb-3">
+                                    Manage Students
 
-        <Link
-            to="/courses"
-            className="btn btn-success w-100 py-3"
-        >
-            <FaBook className="me-2" />
-            Manage Courses
-        </Link>
+                                </Link>
 
-    </div>
+                            </div>
 
-    <div className="col-md-4 mb-3">
+                            <div className="col-md-4 mb-3">
 
-        <Link
-            to="/add-student"
-            className="btn btn-warning w-100 py-3"
-        >
-            <FaPlusCircle className="me-2" />
-            Add Student
-        </Link>
+                                <Link
+                                    to="/courses"
+                                    className="btn btn-success w-100 py-3 rounded-4 shadow-sm"
+                                >
 
-    </div>
+                                    <FaBook className="me-2" />
 
-</div>
+                                    Manage Courses
 
-    </div>
+                                </Link>
 
-</div>
+                            </div>
 
-{/* Students by Course */}
+                            <div className="col-md-4 mb-3">
 
-<div className="card shadow mt-4">
+                                <Link
+                                    to="/add-student"
+                                    className="btn btn-warning w-100 py-3 rounded-4 shadow-sm"
+                                >
 
-    <div className="card-body">
+                                    <FaPlusCircle className="me-2" />
 
-        <h4 className="mb-4">
-            Students by Course
-        </h4>
+                                    Add Student
 
-        <ResponsiveContainer
-            width="100%"
-            height={300}
-        >
+                                </Link>
 
-            <BarChart data={courseChart}>
+                            </div>
 
-                <CartesianGrid strokeDasharray="3 3" />
+                        </div>
 
-                <XAxis dataKey="course" />
-
-                <YAxis />
-
-                <Tooltip
-    cursor={{ fill: "#f5f5f5" }}
-/>
-
-                <Bar
-    dataKey="totalStudents"
-    fill="#2563eb"
-    radius={[8,8,0,0]}
->
-    <LabelList
-        dataKey="totalStudents"
-        position="top"
-    />
-</Bar>
-            </BarChart>
-
-        </ResponsiveContainer>
-
-    </div>
-
-</div>
                     </div>
+
+                </div>
+
+                {/* Chart */}
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                >
+
+                    <div className="card shadow mt-4">
+
+                        <div className="card-body">
+
+                            <h4 className="mb-4">
+                                Student Distribution by Course
+                            </h4>
+
+                            <ResponsiveContainer
+                                width="100%"
+                                height={300}
+                            >
+
+                                <BarChart data={courseChart}>
+
+                                    <CartesianGrid strokeDasharray="3 3" />
+
+                                    <XAxis dataKey="course" />
+
+                                    <YAxis />
+
+                                    <Tooltip
+                                        cursor={{ fill: "#f5f5f5" }}
+                                    />
+
+                                    <Bar
+                                        dataKey="totalStudents"
+                                        fill="#2563eb"
+                                        radius={[8, 8, 0, 0]}
+                                        animationDuration={1000}
+                                    >
+
+                                        <LabelList
+                                            dataKey="totalStudents"
+                                            position="top"
+                                        />
+
+                                    </Bar>
+
+                                </BarChart>
+
+                            </ResponsiveContainer>
+
+                        </div>
+
+                    </div>
+
+                </motion.div>
+
+            </div>
+
+            <Footer />
+
         </>
-
     );
-
 }
 
 export default Dashboard;

@@ -1,0 +1,59 @@
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.icon-btn{
+
+    border:none;
+
+    background:white;
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.icon-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:600;
+
+}

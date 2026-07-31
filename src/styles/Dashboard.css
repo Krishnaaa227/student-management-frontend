@@ -1,19 +1,19 @@
 .dashboard-card{
     border-radius:18px;
     transition:all .3s ease;
+    cursor:pointer;
 }
 
 .dashboard-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
 }
 
-.quick-card{
-    border-radius:18px;
-    transition:all .3s ease;
+.dashboard-card h2{
+    font-size:2.3rem;
+    font-weight:700;
 }
 
-.quick-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(0,0,0,.18);
+.dashboard-card p{
+    opacity:.85;
 }

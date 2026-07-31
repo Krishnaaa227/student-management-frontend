@@ -1,13 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
+
+import {
+    FaUserGraduate,
+    FaEye,
+    FaEyeSlash
+} from "react-icons/fa";
+
+import "../styles/Login.css";
+
 function Register() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [showPassword, setShowPassword] = useState(false);
     const handleRegister = async () => {
 
         try {
@@ -34,46 +42,120 @@ function Register() {
 
     };
 
-    return (
-        <div className="container vh-100 d-flex justify-content-center align-items-center">
+return (
 
-            <div className="card shadow p-4" style={{ width: "400px" }}>
+<div className="login-page">
 
-                <h2 className="text-center mb-4">
-                    Register
-                </h2>
+    <div className="login-card">
 
-                <input
-                    className="form-control mb-3"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+        <div className="login-logo">
+            <FaUserGraduate />
+        </div>
 
-                <input
-                    type="password"
-                    className="form-control mb-3"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+        <h2 className="login-title">
+            Create Account
+        </h2>
 
-                <button
-                    className="btn btn-success w-100"
-                    onClick={handleRegister}
-                >
-                    Register
-                </button>
+        <input
+            className="form-control mb-3"
+            placeholder="Username"
+            value={username}
+            onChange={(e)=>setUsername(e.target.value)}
+        />
 
-                <p className="text-center mt-3">
-                    Already have an account?{" "}
-                    <Link to="/">Login</Link>
-                </p>
+        <input
+            className="form-control mb-3"
+            placeholder="Email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+        />
 
-            </div>
+        <div className="password-box mb-3">
+
+            <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                placeholder="Password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
+            />
+
+            <span
+                className="password-icon"
+                onClick={()=>
+                    setShowPassword(!showPassword)
+                }
+            >
+
+                {showPassword ?
+
+                    <FaEyeSlash/>
+
+                    :
+
+                    <FaEye/>
+                }
+
+            </span>
 
         </div>
-    );
+
+        <button
+            className="btn btn-light w-100"
+            onClick={handleRegister}
+            disabled={loading}
+        >
+
+            {loading ?
+
+                <>
+                    <span
+                        className="spinner-border spinner-border-sm me-2"
+                    ></span>
+
+                    Registering...
+                </>
+
+                :
+
+                "Register"
+
+            }
+
+        </button>
+
+        <p className="text-center mt-4">
+
+            Already have an account?
+
+            <Link
+                to="/login"
+                className="ms-2"
+            >
+                Login
+            </Link>
+
+        </p>
+
+        <div className="footer-text">
+
+    <strong>Student Management System</strong>
+
+    <br/>
+
+    Version 1.0
+
+    <br/>
+
+    © 2026 Krishna Sheladiya
+
+</div>
+
+    </div>
+
+</div>
+
+);
 }
 
 export default Register;
