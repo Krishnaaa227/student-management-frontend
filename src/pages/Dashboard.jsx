@@ -9,9 +9,9 @@ import {
     FaUserGraduate,
     FaBook,
     FaUsers,
-    FaPlusCircle
+    FaPlusCircle,
+    FaLayerGroup
 } from "react-icons/fa";
-
 import {
     ResponsiveContainer,
     BarChart,
@@ -26,10 +26,10 @@ import {
 function Dashboard() {
 
     const [stats, setStats] = useState({
-        totalStudents: 0,
-        totalCourses: 0,
-        totalUsers: 0
-    });
+    totalStudents: 0,
+    totalCourses: 0,
+    totalSemesters: 0
+});
 
     const [courseChart, setCourseChart] = useState([]);
 
@@ -148,42 +148,48 @@ function Dashboard() {
 
                 </div>
 
-                {/* Users */}
+                {/* semesters */}
 
-                <div className="col-lg-4 col-md-6 mb-4">
+<div className="col-lg-4 col-md-6 mb-4">
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                        whileHover={{ scale: 1.05 }}
-                    >
+    <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.30 }}
+        whileHover={{ scale: 1.05 }}
+    >
 
-                        <div className="card dashboard-card bg-warning text-dark shadow border-0">
+        <div className="card dashboard-card bg-warning text-dark shadow border-0">
 
-                            <div className="card-body text-center">
+            <div className="card-body text-center">
 
-                                <FaUsers size={40} />
+                <FaLayerGroup size={40} />
 
-                                <h5 className="mt-3">
-                                    Total Users
-                                </h5>
+                <h5 className="mt-3">
+                    Total Semesters
+                </h5>
 
-                                <h2 className="fw-bold">
-                                    {stats.totalUsers}
-                                </h2>
+                <h2 className="fw-bold">
 
-                                <p className="small opacity-75 mb-0">
-                                    Active Accounts
-                                </p>
+                    <CountUp
+                        start={0}
+                        end={stats.totalSemesters}
+                        duration={2}
+                    />
 
-                            </div>
+                </h2>
 
-                        </div>
+                <p className="mb-0 small opacity-75">
+                    Academic Semesters
+                </p>
 
-                    </motion.div>
+            </div>
 
-                </div>
+        </div>
+
+    </motion.div>
+
+</div>
 
             </div>
 

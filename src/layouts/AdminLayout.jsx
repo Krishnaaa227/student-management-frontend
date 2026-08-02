@@ -1,34 +1,38 @@
+import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-
+import "../styles/AdminLayout.css";
 function AdminLayout({ children }) {
+
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
+
         <div className="d-flex">
 
-            <Sidebar />
+            <Sidebar
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+            />
 
-            <div
-                style={{
-                    marginLeft: "250px",
-                    width: "calc(100% - 250px)",
-                    minHeight: "100vh",
-                    background: "#f8fafc"
-                }}
-            >
-                <Header />
+            <div className="main-content">
 
-                <div
-                    style={{
-                        padding: "30px"
-                    }}
-                >
+                <Header
+                    setSidebarOpen={setSidebarOpen}
+                />
+
+                <div className="p-4">
+
                     {children}
+
                 </div>
 
             </div>
 
         </div>
+
     );
+
 }
 
 export default AdminLayout;

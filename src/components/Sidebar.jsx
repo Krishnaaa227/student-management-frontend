@@ -2,13 +2,14 @@ import {
     FaHome,
     FaUserGraduate,
     FaBook,
-    FaUsers,
-    FaSignOutAlt
+    FaSignOutAlt,
+    FaTimes
 } from "react-icons/fa";
+
 import "../styles/Sidebar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
     const navigate = useNavigate();
 
@@ -23,48 +24,74 @@ function Sidebar() {
 
     return (
 
-        <div className="sidebar">
+        <>
 
-            <div className="logo">
+            {/* Overlay */}
 
-                🎓
+            <div
+                className={`sidebar-overlay ${sidebarOpen ? "show" : ""}`}
+                onClick={() => setSidebarOpen(false)}
+            ></div>
 
-                <h4>SMS Admin</h4>
+            <div className={`sidebar ${sidebarOpen ? "show" : ""}`}>
+
+                <div className="logo">
+
+                    <div className="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            🎓
+
+                            <h4>SMS Admin</h4>
+
+                        </div>
+
+                        <button
+                            className="close-sidebar"
+                            onClick={() => setSidebarOpen(false)}
+                        >
+                            <FaTimes />
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <NavLink
+                    to="/dashboard"
+                    onClick={() => setSidebarOpen(false)}
+                >
+                    <FaHome />
+                    Dashboard
+                </NavLink>
+
+                <NavLink
+                    to="/students"
+                    onClick={() => setSidebarOpen(false)}
+                >
+                    <FaUserGraduate />
+                    Students
+                </NavLink>
+
+                <NavLink
+                    to="/courses"
+                    onClick={() => setSidebarOpen(false)}
+                >
+                    <FaBook />
+                    Courses
+                </NavLink>
+                <button
+                    className="logout-btn"
+                    onClick={logout}
+                >
+                    <FaSignOutAlt />
+                    Logout
+                </button>
 
             </div>
 
-            <NavLink to="/dashboard">
-                <FaHome />
-                Dashboard
-            </NavLink>
-
-            <NavLink to="/students">
-                <FaUserGraduate />
-                Students
-            </NavLink>
-
-            <NavLink to="/courses">
-                <FaBook />
-                Courses
-            </NavLink>
-
-            <NavLink to="/users">
-                <FaUsers />
-                Users
-            </NavLink>
-
-            <button
-                className="logout-btn"
-                onClick={logout}
-            >
-
-                <FaSignOutAlt />
-
-                Logout
-
-            </button>
-
-        </div>
+        </>
 
     );
 

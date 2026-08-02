@@ -1,21 +1,34 @@
 import "../styles/Header.css";
-import { FaBell, FaUserCircle } from "react-icons/fa";
+import { FaBell, FaUserCircle, FaBars } from "react-icons/fa";
 
-function Header() {
+function Header({ setSidebarOpen }) {
+
     const role = localStorage.getItem("role");
 
     return (
+
         <header className="app-header">
 
-            <div>
+            <div className="d-flex align-items-center gap-3">
 
-                <h3 className="mb-0">
-                    Student Management System
-                </h3>
+                <button
+                    className="menu-btn"
+                    onClick={() => setSidebarOpen(true)}
+                >
+                    <FaBars />
+                </button>
 
-                <small className="text-muted">
-                    Welcome back 👋
-                </small>
+                <div>
+
+                    <h3 className="mb-0">
+                        Student Management System
+                    </h3>
+
+                    <small className="text-muted">
+                        Welcome back 👋
+                    </small>
+
+                </div>
 
             </div>
 
@@ -47,7 +60,9 @@ function Header() {
             </div>
 
         </header>
+
     );
+
 }
 
 export default Header;
