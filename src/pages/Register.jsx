@@ -13,149 +13,181 @@ import "../styles/Login.css";
 
 function Register() {
 
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const handleRegister = async () => {
+
+        if (!username || !email || !password) {
+            toast.warning("Please fill all fields");
+            return;
+        }
+
+        setLoading(true);
 
         try {
 
-            const response = await register({
+            await register({
                 username,
+                email,
                 password
             });
 
-            alert(response.data);
+            toast.success("Registration Successful!");
 
             setUsername("");
+            setEmail("");
             setPassword("");
+
+            navigate("/");
 
         } catch (error) {
 
             if (error.response) {
-                toast.error(error.response.data.message || "Registration Failed");
+
+                toast.error(
+                    error.response.data.message ||
+                    "Registration Failed"
+                );
+
             } else {
-               toast.error("Server Error");
+
+                toast.error("Server Error");
+
             }
+
+        } finally {
+
+            setLoading(false);
 
         }
 
     };
 
-return (
+    return (
 
-<div className="login-page">
+        <div className="login-page">
 
-    <div className="login-card">
+            <div className="login-card">
 
-        <div className="login-logo">
-            <FaUserGraduate />
-        </div>
+                <div className="login-logo">
+                    <FaUserGraduate />
+                </div>
 
-        <h2 className="login-title">
-            Create Account
-        </h2>
+                <h2 className="login-title">
+                    Create Account
+                </h2>
 
-        <input
-            className="form-control mb-3"
-            placeholder="Username"
-            value={username}
-            onChange={(e)=>setUsername(e.target.value)}
-        />
+                <input
+                    className="form-control mb-3"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
 
-        <input
-            className="form-control mb-3"
-            placeholder="Email"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-        />
+                <input
+                    type="email"
+                    className="form-control mb-3"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
 
-        <div className="password-box mb-3">
+                <div className="password-box mb-3">
 
-            <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                placeholder="Password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-            />
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        className="form-control"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
 
-            <span
-                className="password-icon"
-                onClick={()=>
-                    setShowPassword(!showPassword)
-                }
-            >
-
-                {showPassword ?
-
-                    <FaEyeSlash/>
-
-                    :
-
-                    <FaEye/>
-                }
-
-            </span>
-
-        </div>
-
-        <button
-            className="btn btn-light w-100"
-            onClick={handleRegister}
-            disabled={loading}
-        >
-
-            {loading ?
-
-                <>
                     <span
-                        className="spinner-border spinner-border-sm me-2"
-                    ></span>
+                        className="password-icon"
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
 
-                    Registering...
-                </>
+                        {showPassword ?
 
-                :
+                            <FaEyeSlash />
 
-                "Register"
+                            :
 
-            }
+                            <FaEye />
 
-        </button>
+                        }
 
-        <p className="text-center mt-4">
+                    </span>
 
-            Already have an account?
+                </div>
 
-            <Link
-                to="/login"
-                className="ms-2"
-            >
-                Login
-            </Link>
+                <button
+                    className="btn btn-light w-100"
+                    onClick={handleRegister}
+                    disabled={loading}
+                >
 
-        </p>
+                    {loading ? (
 
-        <div className="footer-text">
+                        <>
+                            <span
+                                className="spinner-border spinner-border-sm me-2"
+                            ></span>
 
-    <strong>Student Management System</strong>
+                            Registering...
 
-    <br/>
+                        </>
 
-    Version 1.0
+                    ) : (
 
-    <br/>
+                        "Register"
 
-    © 2026 Krishna Sheladiya
+                    )}
 
-</div>
+                </button>
 
-    </div>
+                <p className="text-center mt-4">
 
-</div>
+                    Already have an account?
 
-);
+                    <Link
+                        to="/"
+                        className="ms-2"
+                    >
+                        Login
+                    </Link>
+
+                </p>
+
+                <div className="footer-text">
+
+                    <strong>
+                        Student Management System
+                    </strong>
+
+                    <br />
+
+                    Version 1.0
+
+                    <br />
+
+                    © 2026 Krishna Sheladiya
+
+                </div>
+
+            </div>
+
+        </div>
+
+    );
+
 }
 
 export default Register;

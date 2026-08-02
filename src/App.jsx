@@ -7,59 +7,65 @@ import Students from "./pages/Students";
 import EditStudent from "./pages/EditStudent";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Courses from "./pages/Courses";
+
 function App() {
     return (
         <BrowserRouter>
             <Routes>
 
-    <Route path="/" element={<Login />} />
+                <Route path="/" element={<Login />} />
 
-    <Route path="/register" element={<Register />} />
+                {/* ADD THIS */}
+                <Route path="/login" element={<Login />} />
 
-    <Route
-        path="/dashboard"
-        element={
-            <ProtectedRoute>
-                <Dashboard />
-            </ProtectedRoute>
-        }
-    />
+                <Route path="/register" element={<Register />} />
 
-    <Route
-        path="/students"
-        element={
-            <ProtectedRoute>
-                <Students />
-            </ProtectedRoute>
-        }
-    />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    }
+                />
 
-    <Route
-        path="/add-student"
-        element={
-            <ProtectedRoute>
-                <AddStudent />
-            </ProtectedRoute>
-        }
-    />
+                <Route
+                    path="/students"
+                    element={
+                        <ProtectedRoute>
+                            <Students />
+                        </ProtectedRoute>
+                    }
+                />
 
-    <Route
-        path="/edit-student/:id"
-        element={
-            <ProtectedRoute>
-                <EditStudent />
-            </ProtectedRoute>
-        }
-    />
-    <Route
-    path="/courses"
-    element={
-        <ProtectedRoute>
-            <Courses />
-        </ProtectedRoute>
-    }
-/>
-</Routes>
+                <Route
+                    path="/add-student"
+                    element={
+                        <ProtectedRoute>
+                            <AddStudent />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/edit-student/:id"
+                    element={
+                        <ProtectedRoute>
+                            <EditStudent />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/courses"
+                    element={
+                        <ProtectedRoute>
+                            <Courses />
+                        </ProtectedRoute>
+                    }
+                />
+
+            </Routes>
         </BrowserRouter>
     );
 }
