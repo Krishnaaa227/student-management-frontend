@@ -6,19 +6,42 @@ import {
     FaTimes
 } from "react-icons/fa";
 import "../styles/Sidebar.css";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
     const navigate = useNavigate();
 
-    const logout = () => {
+    const logout = async () => {
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
+    const result = await Swal.fire({
 
-        navigate("/");
-    };
+        title: "Logout?",
+        text: "Are you sure you want to logout?",
+        icon: "question",
+
+        showCancelButton: true,
+
+        confirmButtonText: "Logout",
+        cancelButtonText: "Cancel",
+
+        confirmButtonColor: "#dc3545",
+        cancelButtonColor: "#6c757d"
+
+    });
+
+    if (!result.isConfirmed) return;
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+
+    toast.success("Logged out successfully!");
+
+    navigate("/", { replace: true });
+
+};
 
     return (
         <>
