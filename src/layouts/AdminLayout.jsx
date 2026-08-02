@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import "../styles/AdminLayout.css";
+
 function AdminLayout({ children }) {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -15,13 +15,20 @@ function AdminLayout({ children }) {
                 setSidebarOpen={setSidebarOpen}
             />
 
-            <div className="main-content">
+            <div
+                className="main-content"
+                style={{
+                    flex: 1,
+                    minHeight: "100vh",
+                    background: "#f8fafc"
+                }}
+            >
 
                 <Header
                     setSidebarOpen={setSidebarOpen}
                 />
 
-                <div className="p-4">
+                <div className="container-fluid p-3 p-md-4">
 
                     {children}
 

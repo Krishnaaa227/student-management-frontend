@@ -1,69 +1,84 @@
 .app-header{
-
     height:80px;
-
     background:white;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:0 35px;
-
     border-bottom:1px solid #e5e7eb;
-
     position:sticky;
-
     top:0;
-
     z-index:100;
-
 }
 
-/* Hamburger Button */
-
 .menu-btn{
-
     display:none;
-
     border:none;
-
     background:none;
-
     font-size:24px;
-
     cursor:pointer;
+}
+
+@media (max-width:992px){
+
+    .app-header{
+        padding:15px 20px;
+    }
 
 }
 
-/* Tablet */
+@media (max-width:768px){
 
-@media(max-width:992px){
+    .app-header{
 
-.app-header{
+        height:auto;
 
-    padding:15px 20px;
+        padding:12px 15px;
 
-}
+        flex-direction:row;
 
-}
+        justify-content:space-between;
 
-/* Mobile */
+        align-items:center;
 
-@media(max-width:768px){
+    }
 
-.app-header{
+    .menu-btn{
 
-    padding:15px 20px;
+        display:block;
 
-}
+    }
 
-.menu-btn{
+    .app-header h3{
 
-    display:block;
+        font-size:18px;
 
-}
+        margin:0;
+
+    }
+
+    .app-header small{
+
+        display:none;
+
+    }
+
+    .header-right{
+
+        gap:10px;
+
+    }
+
+    .header-right strong{
+
+        font-size:14px;
+
+    }
+
+    .header-right small{
+
+        display:none;
+
+    }
 
 }

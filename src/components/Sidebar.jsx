@@ -5,7 +5,6 @@ import {
     FaSignOutAlt,
     FaTimes
 } from "react-icons/fa";
-
 import "../styles/Sidebar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -23,7 +22,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     };
 
     return (
-
         <>
 
             {/* Overlay */}
@@ -33,28 +31,22 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 onClick={() => setSidebarOpen(false)}
             ></div>
 
-            <div className={`sidebar ${sidebarOpen ? "show" : ""}`}>
+            <div
+                className={`sidebar ${sidebarOpen ? "show" : ""}`}
+            >
+
+                <button
+                    className="close-sidebar"
+                    onClick={() => setSidebarOpen(false)}
+                >
+                    <FaTimes />
+                </button>
 
                 <div className="logo">
 
-                    <div className="d-flex justify-content-between align-items-center">
+                    🎓
 
-                        <div>
-
-                            🎓
-
-                            <h4>SMS Admin</h4>
-
-                        </div>
-
-                        <button
-                            className="close-sidebar"
-                            onClick={() => setSidebarOpen(false)}
-                        >
-                            <FaTimes />
-                        </button>
-
-                    </div>
+                    <h4>SMS Admin</h4>
 
                 </div>
 
@@ -81,6 +73,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                     <FaBook />
                     Courses
                 </NavLink>
+
                 <button
                     className="logout-btn"
                     onClick={logout}
@@ -92,9 +85,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </div>
 
         </>
-
     );
-
 }
 
 export default Sidebar;

@@ -32,7 +32,7 @@ function Header({ setSidebarOpen }) {
 
             </div>
 
-            <div className="d-flex align-items-center gap-4">
+            <div className="d-flex align-items-center gap-3 header-right">
 
                 <FaBell
                     size={20}

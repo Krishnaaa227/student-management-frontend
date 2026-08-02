@@ -107,3 +107,23 @@
 }
 
 }
+.main-content{
+
+    margin-left:250px;
+
+    transition:.3s;
+
+}
+.main-content{
+    margin-left:250px;
+    transition:.3s;
+}
+
+@media(max-width:768px){
+
+    .main-content{
+        margin-left:0;
+        width:100%;
+    }
+
+}
