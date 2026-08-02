@@ -80,7 +80,7 @@ const loadStudent = async () => {
         <>
             <Adminlayout>
 
-            <div className="container mt-5">
+            <div className="w-100">
 
                 <div className="card shadow">
 

@@ -123,13 +123,7 @@ function Students() {
 
         <>
         <AdminLayout>
-            <div
-    className="container-fluid"
-    style={{
-        marginLeft: "270px",
-        padding: "30px"
-    }}
->
+            <div className="w-100">
                 <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
 
                     <div>

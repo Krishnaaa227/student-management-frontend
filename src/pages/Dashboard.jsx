@@ -60,7 +60,7 @@ function Dashboard() {
 
     return (
         <AdminLayout>
-        <div className="container mt-4">
+        <div className="w-100">
 
             <div className="mb-4">
                 <h2 className="fw-bold">

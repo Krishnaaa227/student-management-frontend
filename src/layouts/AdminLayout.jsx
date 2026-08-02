@@ -2,7 +2,6 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 
 function AdminLayout({ children }) {
-
     return (
         <div className="d-flex">
 
@@ -11,15 +10,18 @@ function AdminLayout({ children }) {
             <div
                 style={{
                     marginLeft: "250px",
-                    width: "100%",
-                    background: "#f8fafc",
-                    minHeight: "100vh"
+                    width: "calc(100% - 250px)",
+                    minHeight: "100vh",
+                    background: "#f8fafc"
                 }}
             >
-
                 <Header />
 
-                <div className="container-fluid p-4">
+                <div
+                    style={{
+                        padding: "30px"
+                    }}
+                >
                     {children}
                 </div>
 
