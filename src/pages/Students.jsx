@@ -144,7 +144,7 @@ function Students() {
 
                     {role === "ADMIN" && (
 
-                        <div className="d-flex gap-2 mt-3 mt-md-0">
+                        <div className="d-flex gap-2 mt-3 mt-md-0 flex-wrap">
 
                             <button
 
@@ -246,9 +246,9 @@ function Students() {
 
                     <>
 
-                        <div className="table-responsive">
+                       <div className="table-responsive d-none d-md-block">
 
-                            <table className="table table-hover align-middle shadow-sm">
+    <table className="table table-hover align-middle shadow-sm">
 
                                 <thead className="table-primary">
 
@@ -354,7 +354,81 @@ function Students() {
 </table>
 
 </div>
+{/* Mobile Cards */}
 
+<div className="d-md-none">
+
+    {currentStudents.map((student) => (
+
+        <div
+            className="card shadow-sm mb-3"
+            key={student.id}
+        >
+
+            <div className="card-body">
+
+                <h5 className="fw-bold">
+
+                    {student.firstName} {student.lastName}
+
+                </h5>
+
+                <p className="mb-1">
+
+                    <strong>Roll No:</strong> {student.rollNo}
+
+                </p>
+
+                <p className="mb-1">
+
+                    <strong>Course:</strong> {student.course}
+
+                </p>
+
+                <p className="mb-3">
+
+                    <strong>Semester:</strong> {student.semester}
+
+                </p>
+
+                {role === "ADMIN" && (
+
+                    <div className="d-flex gap-2 flex-wrap">
+
+                        <button
+                            className="btn btn-info btn-sm flex-fill"
+                            data-bs-toggle="modal"
+                            data-bs-target="#studentModal"
+                            onClick={() => setSelectedStudent(student)}
+                        >
+                            <FaEye /> View
+                        </button>
+
+                        <Link
+                            to={`/edit-student/${student.id}`}
+                            className="btn btn-warning btn-sm flex-fill"
+                        >
+                            <FaEdit /> Edit
+                        </Link>
+
+                        <button
+                            className="btn btn-danger btn-sm flex-fill"
+                            onClick={() => handleDelete(student.id)}
+                        >
+                            <FaTrash /> Delete
+                        </button>
+
+                    </div>
+
+                )}
+
+            </div>
+
+        </div>
+
+    ))}
+
+</div>
 <div className="d-flex justify-content-between align-items-center mt-4 flex-wrap">
 
     <small className="text-muted">
@@ -371,9 +445,9 @@ function Students() {
 
     </small>
 
-    <nav>
+    <nav className="mt-3 mt-md-0">
 
-        <ul className="pagination mb-0">
+        <ul className="pagination mb-0 flex-wrap justify-content-center">
 
             <li
                 className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
