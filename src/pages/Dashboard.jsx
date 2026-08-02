@@ -4,7 +4,6 @@ import { getDashboardStats, getCourseChart } from "../services/dashboardService"
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import CountUp from "react-countup";
 import AdminLayout from "../layouts/AdminLayout";
 import {
     FaUserGraduate,
@@ -171,15 +170,8 @@ function Dashboard() {
                 </h5>
 
                 <h2 className="fw-bold">
-
-                    <CountUp
-                        start={0}
-                        end={stats.totalSemesters}
-                        duration={2}
-                    />
-
-                </h2>
-
+    {stats.totalSemesters}
+</h2>
                 <p className="mb-0 small opacity-75">
                     Academic Semesters
                 </p>
