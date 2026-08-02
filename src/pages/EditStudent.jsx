@@ -78,7 +78,7 @@ const loadStudent = async () => {
     return (
 
         <>
-            <Adminlayout>
+            <AdminLayout>
 
             <div className="w-100">
 
@@ -207,7 +207,7 @@ const loadStudent = async () => {
                 </div>
 
             </div>
-            </Adminlayout>
+            </AdminLayout>
         </>
 
     );
