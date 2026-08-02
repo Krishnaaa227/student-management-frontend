@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getStudentById, updateStudent } from "../services/studentService";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import AdminLayout from "../layouts/AdminLayout";
 import { getCourses } from "../services/courseService";
 function EditStudent() {
 

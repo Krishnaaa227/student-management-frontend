@@ -4,6 +4,7 @@ import {
     deleteStudent
 } from "../services/studentService";
 import Header from "../components/Header";
+import AdminLayout from "../layouts/AdminLayout";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";

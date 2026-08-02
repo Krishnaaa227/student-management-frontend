@@ -4,7 +4,7 @@ import { getDashboardStats, getCourseChart } from "../services/dashboardService"
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import AdminLayout from "../layouts/AdminLayout";
 import {
     FaUserGraduate,
     FaBook,

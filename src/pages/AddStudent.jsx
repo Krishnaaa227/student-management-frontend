@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCourses } from "../services/courseService";
 import Swal from "sweetalert2";
+import AdminLayout from "../layouts/AdminLayout";
 function AddStudent() {
 
     const navigate = useNavigate();
