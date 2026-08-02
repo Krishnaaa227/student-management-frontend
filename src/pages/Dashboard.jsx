@@ -59,6 +59,7 @@ function Dashboard() {
     };
 
     return (
+        <AdminLayout>
         <div className="container mt-4">
 
             <div className="mb-4">
@@ -290,6 +291,7 @@ function Dashboard() {
             </motion.div>
 
         </div>
+        </AdminLayout>
     );
 }
 

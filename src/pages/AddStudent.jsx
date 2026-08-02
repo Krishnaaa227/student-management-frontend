@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import { addStudent } from "../services/studentService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -93,7 +92,7 @@ const loadCourses = async () => {
 
     return (
         <>
-            <Navbar />
+           <AdminLayout>
 
             <div className="container mt-5">
 
@@ -318,7 +317,7 @@ const loadCourses = async () => {
                 </div>
 
             </div>
-
+</AdminLayout>
         </>
     );
 }

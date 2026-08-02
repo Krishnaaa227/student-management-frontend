@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import {
     getCourses,
     addCourse,
@@ -16,7 +15,6 @@ import {
 
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import Sidebar from "../components/Sidebar";
 
 function Courses() {
 
@@ -202,8 +200,7 @@ function Courses() {
     );
     return (
 <>
-    <Sidebar/>
-
+<AdminLayout>
     <div
     className="container-fluid"
     style={{
@@ -211,7 +208,7 @@ function Courses() {
         padding: "30px"
     }}
 >
-<Header/>
+
         <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
 
             <div>
@@ -666,7 +663,7 @@ function Courses() {
         </div>
 
     </div>
-
+</AdminLayout>
 </>
 );
 

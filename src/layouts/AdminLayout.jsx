@@ -4,34 +4,29 @@ import Header from "../components/Header";
 function AdminLayout({ children }) {
 
     return (
-
         <div className="d-flex">
 
-            <Sidebar/>
+            <Sidebar />
 
-            <main
+            <div
                 style={{
-                    marginLeft:"250px",
-                    width:"100%",
-                    minHeight:"100vh",
-                    background:"#f8fafc"
+                    marginLeft: "250px",
+                    width: "100%",
+                    background: "#f8fafc",
+                    minHeight: "100vh"
                 }}
             >
 
-                <Header/>
+                <Header />
 
                 <div className="container-fluid p-4">
-
                     {children}
-
                 </div>
 
-            </main>
+            </div>
 
         </div>
-
     );
-
 }
 
 export default AdminLayout;

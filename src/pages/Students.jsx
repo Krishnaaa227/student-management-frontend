@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import {
     getAllStudents,
     deleteStudent
@@ -17,7 +16,6 @@ import {
     FaFileExcel,
     FaEye
 } from "react-icons/fa";
-import Sidebar from "../components/Sidebar";
 
 function Students() {
 
@@ -124,9 +122,7 @@ function Students() {
     return (
 
         <>
-
-            <Sidebar />
-
+        <AdminLayout>
             <div
     className="container-fluid"
     style={{
@@ -521,8 +517,8 @@ function Students() {
     </div>
 
 </div>
+</AdminLayout>
 </>
-
 );
 
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { getStudentById, updateStudent } from "../services/studentService";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -78,7 +77,7 @@ const loadStudent = async () => {
     return (
 
         <>
-            <Navbar />
+            <Adminlayout>
 
             <div className="container mt-5">
 
@@ -207,7 +206,7 @@ const loadStudent = async () => {
                 </div>
 
             </div>
-
+            </Adminlayout>
         </>
 
     );
