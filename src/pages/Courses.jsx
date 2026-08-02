@@ -6,7 +6,6 @@ import {
     deleteCourse
 } from "../services/courseService";
 import AdminLayout from "../layouts/AdminLayout";
-import Header from "../components/Header";
 import {
     FaSearch,
     FaPlus,

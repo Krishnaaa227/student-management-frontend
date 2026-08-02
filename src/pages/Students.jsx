@@ -3,7 +3,6 @@ import {
     getAllStudents,
     deleteStudent
 } from "../services/studentService";
-import Header from "../components/Header";
 import AdminLayout from "../layouts/AdminLayout";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -131,7 +130,6 @@ function Students() {
         padding: "30px"
     }}
 >
-<Header/>
                 <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
 
                     <div>
