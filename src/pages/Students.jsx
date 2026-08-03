@@ -39,7 +39,7 @@ function Students() {
             setLoading(true);
 
             const response = await getAllStudents();
-            console.log(response.data);
+            console.log("Students API:", response.data);
             setStudents(response.data);
 
         } catch (error) {
@@ -272,83 +272,43 @@ function Students() {
 
                                 </thead>
 
-                                <tbody>
-                            {currentStudents.map((student) => (
+ <tbody>
+  {currentStudents.map((student) => {
+    console.log("Student:", student);
 
-    <tr key={student.id}>
-
+    return (
+      <tr key={student.id || student.rollNo}>
         <td>{student.rollNo}</td>
 
         <td>
-
-            <strong>
-                {student.firstName} {student.lastName}
-            </strong>
-
+          <strong>
+            {student.firstName} {student.lastName}
+          </strong>
         </td>
 
         <td>
-
-            <span className="badge bg-info text-dark">
-
-                {student.course}
-
-            </span>
-
+          <span className="badge bg-info text-dark">
+            {student.course}
+          </span>
         </td>
 
         <td>
-
-            <span className="badge bg-secondary">
-
-                Sem {student.semester}
-
-            </span>
-
+          <span className="badge bg-secondary">
+            Sem {student.semester}
+          </span>
         </td>
 
         <td className="text-center">
-
-            {role === "ADMIN" && (
-
-                <div className="d-flex justify-content-center gap-2">
-
-    <button
-        className="btn btn-info btn-sm"
-        title="View"
-        data-bs-toggle="modal"
-        data-bs-target="#studentModal"
-        onClick={() => setSelectedStudent(student)}
-    >
-        <FaEye />
-    </button>
-
-    <Link
-        to={`/edit-student/${student.id}`}
-        className="btn btn-warning btn-sm"
-        title="Edit"
-    >
-        <FaEdit />
-    </Link>
-
-    <button
-        className="btn btn-danger btn-sm"
-        title="Delete"
-        onClick={() => handleDelete(student.id)}
-    >
-        <FaTrash />
-    </button>
-
-</div>
-
-            )}
-
+          <Link
+            to={`/edit-student/${student.id}`}
+            className="btn btn-warning btn-sm"
+          >
+            <FaEdit />
+          </Link>
         </td>
-
-    </tr>
-
-))}
-
+      </tr>
+    );
+  })}
 </tbody>
 
 </table>
@@ -358,7 +318,11 @@ function Students() {
 
 <div className="d-md-none">
 
-    {currentStudents.map((student) => (
+    {currentStudents.map((student) => {
+
+    console.log("Mobile Student:", student);
+
+    return (
         <div
             className="card shadow-sm mb-3"
             key={student.id}
@@ -423,9 +387,11 @@ function Students() {
 
             </div>
 
-        </div>
+            </div>
 
-    ))}
+    );
+
+})}
 
 </div>
 <div className="d-flex justify-content-between align-items-center mt-4 flex-wrap">
