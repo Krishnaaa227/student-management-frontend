@@ -39,7 +39,7 @@ function Students() {
             setLoading(true);
 
             const response = await getAllStudents();
-
+            console.log(response.data);
             setStudents(response.data);
 
         } catch (error) {
