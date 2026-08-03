@@ -359,7 +359,6 @@ function Students() {
 <div className="d-md-none">
 
     {currentStudents.map((student) => (
-
         <div
             className="card shadow-sm mb-3"
             key={student.id}

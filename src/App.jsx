@@ -48,13 +48,13 @@ function App() {
                 />
 
                 <Route
-                    path="/edit-student/:id"
-                    element={
-                        <ProtectedRoute>
-                            <EditStudent />
-                        </ProtectedRoute>
-                    }
-                />
+    path="/edit-student/:id"
+    element={
+        <ProtectedRoute>
+            <EditStudent />
+        </ProtectedRoute>
+    }
+/>
 
                 <Route
                     path="/courses"
