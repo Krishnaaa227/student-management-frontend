@@ -277,7 +277,7 @@ function Students() {
     console.log("Student:", student);
 
     return (
-      <tr key={student.id || student.rollNo}>
+      <tr key={student.id}>
         <td>{student.rollNo}</td>
 
         <td>
@@ -299,13 +299,42 @@ function Students() {
         </td>
 
         <td className="text-center">
-          <Link
-            to={`/edit-student/${student.id}`}
-            className="btn btn-warning btn-sm"
-          >
-            <FaEdit />
-          </Link>
-        </td>
+
+    {role === "ADMIN" && (
+
+        <div className="d-flex justify-content-center gap-2">
+
+            <button
+                className="btn btn-info btn-sm"
+                title="View"
+                data-bs-toggle="modal"
+                data-bs-target="#studentModal"
+                onClick={() => setSelectedStudent(student)}
+            >
+                <FaEye />
+            </button>
+
+            <Link
+                to={`/edit-student/${student.id}`}
+                className="btn btn-warning btn-sm"
+                title="Edit"
+            >
+                <FaEdit />
+            </Link>
+
+            <button
+                className="btn btn-danger btn-sm"
+                title="Delete"
+                onClick={() => handleDelete(student.id)}
+            >
+                <FaTrash />
+            </button>
+
+        </div>
+
+    )}
+
+</td>
       </tr>
     );
   })}
