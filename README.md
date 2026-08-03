@@ -26,7 +26,7 @@ React.js frontend for the Student Management System.
 
 ## Live Demo
 
-https://student-management-frontend-phi-six.vercel.app/
+https://student-management-system-bykrishna.vercel.app/
 
 ## Backend Repository
 
